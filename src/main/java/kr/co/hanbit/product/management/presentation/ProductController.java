@@ -3,6 +3,8 @@ package kr.co.hanbit.product.management.presentation;
 import kr.co.hanbit.product.management.application.SimpleProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,31 +17,36 @@ public class ProductController {
         this.simpleProductService = simpleProductService;
     }
 
-    @PostMapping("/products")
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    public ProductDto createProduct(@Valid @RequestBody ProductDto productDto) {
         return simpleProductService.add(productDto);
     }
 
-    @GetMapping("/products/{id}")
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
     public ProductDto findProductById(@PathVariable Long id) {
         return simpleProductService.findById(id);
     }
 
-    @GetMapping("/products")
-    public List<ProductDto> findProducts(@RequestParam(required = false) String name) {
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public List<ProductDto> findProducts(
+            @RequestParam(required = false) String name
+    ) {
         if (null == name)
             return simpleProductService.findAll();
 
         return simpleProductService.findByNameContaining(name);
     }
 
-    @PutMapping("/products/{id}")
-    public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+    public ProductDto updateProduct(
+            @PathVariable Long id,
+            @RequestBody ProductDto productDto
+    ) {
         productDto.setId(id);
         return simpleProductService.update(productDto);
     }
 
-    @DeleteMapping("/products/{id}")
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
     public void deleteProduct(@PathVariable Long id) {
         simpleProductService.delete(id);
     }
