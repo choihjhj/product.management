@@ -16,17 +16,17 @@ public class ProductController {
         this.simpleProductService = simpleProductService;
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    @PostMapping("/products")
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
         return simpleProductService.add(productDto);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
+    @GetMapping("/products/{id}")
     public ProductDto findProductById(@PathVariable Long id) {
         return simpleProductService.findById(id);
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @GetMapping("/products")
     public List<ProductDto> findProducts(
             @RequestParam(required = false) String name
     ) {
@@ -36,7 +36,7 @@ public class ProductController {
         return simpleProductService.findByNameContaining(name);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+    @PutMapping("/products/{id}")
     public ProductDto updateProduct(
             @PathVariable Long id,
             @RequestBody ProductDto productDto
@@ -45,7 +45,7 @@ public class ProductController {
         return simpleProductService.update(productDto);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/products/{id}")
     public void deleteProduct(@PathVariable Long id) {
         simpleProductService.delete(id);
     }
