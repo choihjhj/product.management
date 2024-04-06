@@ -3,7 +3,6 @@ package kr.co.hanbit.product.management.presentation;
 import kr.co.hanbit.product.management.application.SimpleProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -27,9 +26,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<ProductDto> findProducts(
-            @RequestParam(required = false) String name
-    ) {
+    public List<ProductDto> findProducts(@RequestParam(required = false) String name) {
         if (null == name)
             return simpleProductService.findAll();
 
@@ -37,10 +34,7 @@ public class ProductController {
     }
 
     @PutMapping("/products/{id}")
-    public ProductDto updateProduct(
-            @PathVariable Long id,
-            @RequestBody ProductDto productDto
-    ) {
+    public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         productDto.setId(id);
         return simpleProductService.update(productDto);
     }
