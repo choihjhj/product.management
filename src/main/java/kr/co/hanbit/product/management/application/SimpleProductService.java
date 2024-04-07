@@ -37,6 +37,7 @@ public class SimpleProductService {
         Product product = productRepository.findById(id);
         ProductDto productDto = modelMapper.map(product, ProductDto.class);
         return productDto;
+//        return new ProductDto();
     }
 
     public List<ProductDto> findAll() {
