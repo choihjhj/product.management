@@ -1,10 +1,7 @@
 server:
   port: 9999
 spring:
+  profiles:
+    active: test
   application:
     name: product.management
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    url: jdbc:mysql://localhost:3306/product_management
-    password: hanbit
