@@ -19,6 +19,7 @@ public class Application {
 	}
 
 	//new ModelMapper로 매번 DI해도 되지만, 성능상 미리 빈으로 등록해서 사용하는 것이 좋다.
+	/*
 	@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
@@ -27,6 +28,8 @@ public class Application {
 				.setFieldMatchingEnabled(true);
 		return modelMapper;
 	}
+	*/
+
 	@Bean
 	@Profile("prod")
 	public ApplicationRunner runner(DataSource dataSource) {
